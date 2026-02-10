@@ -263,7 +263,9 @@ export class ProxyDurableObject extends DurableObject {
 // --- Worker 入口 ---
 export default {
   async fetch(request, env) {
-    const id = env.PROXY_DO.idFromName("global-proxy");
+    // 获取当前请求进入的机房代码，例如 "HKG" (香港), "SIN" (新加坡)
+    const colo = request.cf.colo || "global-proxya";
+    const id = env.PROXY_DO.idFromName(`${colo}`);
     const stub = env.PROXY_DO.get(id);
     
     // 直接转发请求给 Durable Object
