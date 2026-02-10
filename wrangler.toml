@@ -1,0 +1,16 @@
+name = "hello-go-go"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# ⚠️ 必须开启 nodejs_compat 才能用 WebSocketPair / sockets
+compatibility_flags = ["nodejs_compat"]
+
+# Durable Object 绑定
+[[durable_objects.bindings]]
+name = "PROXY_DO"
+class_name = "ProxyDurableObject"
+
+# 第一次部署必须有 migration
+[[migrations]]
+tag = "v1"
+new_classes = ["ProxyDurableObject"]
